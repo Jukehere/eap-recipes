@@ -10,6 +10,8 @@ def startmenu():
         if c == '1':
             check = 0
         if c == '2':
+            from Signup import signupproccess
+            signupproccess()
             check = 0
         if c == '3':
             check = 0
