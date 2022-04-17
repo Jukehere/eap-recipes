@@ -11,7 +11,6 @@ def mainmenu(username, rank):
         cursor.execute("""SELECT Rank FROM Users WHERE Username = (?)""",(username,))
         temp = cursor.fetchone()
         rank = str(temp[0])
-    print(rank)
     while check == 1:
         if rank != 2:
             print("1. Προβολή Συνταγών")
