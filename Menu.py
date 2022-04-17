@@ -11,26 +11,52 @@ def mainmenu(username, rank):
         cursor.execute("""SELECT Rank FROM Users WHERE Username = (?)""",(username,))
         temp = cursor.fetchone()
         rank = str(temp[0])
+    print(rank)
     while check == 1:
-        print("1. Προβολή Συνταγών")
-        print("2. Δημιουργία Συνταγών")
-        print("3. Οι Συνταγές μου")
-        print("4. Αποσύνδεση")
-        mc = input('\nΔιαλέξτε από τις παραπάνω επιλογές: ')
-        if mc == '1':
-            check = 0
-        if mc == '2':
-            if username == 'Επισκέπτης':
-                print("\n ΣΦΑΛΜΑ: ΔΕΝ ΜΠΟΡΕΙΣ ΝΑ ΔΗΜΙΟΥΡΓΗΣΕΙΣ ΣΥΝΤΑΓΕΣ ΩΣ ΕΠΙΣΚΕΠΤΗΣ.\n")
-            elif username != 'Επισκέπτης':
+        if rank != 2:
+            print("1. Προβολή Συνταγών")
+            print("2. Δημιουργία Συνταγών")
+            print("3. Οι Συνταγές μου")
+            print("4. Αποσύνδεση")
+            mc = input('\nΔιαλέξτε από τις παραπάνω επιλογές: ')
+            if mc == '1':
                 check = 0
-        if mc == '3':
-            if username == 'Επισκέπτης':
-                print("\n ΣΦΑΛΜΑ: ΑΥΤΗ Η ΔΥΝΑΤΟΤΗΤΑ ΕΙΝΑΙ ΜΟΝΟ ΓΙΑ ΕΓΓΕΓΡΑΜΜΕΝΟΥΣ ΧΡΗΣΤΕΣ.\n")
-            elif username != 'Επισκέπτης':
+            if mc == '2':
+                if username == 'Επισκέπτης':
+                    print("\n ΣΦΑΛΜΑ: ΔΕΝ ΜΠΟΡΕΙΣ ΝΑ ΔΗΜΙΟΥΡΓΗΣΕΙΣ ΣΥΝΤΑΓΕΣ ΩΣ ΕΠΙΣΚΕΠΤΗΣ.\n")
+                elif username != 'Επισκέπτης':
+                    check = 0
+            if mc == '3':
+                if username == 'Επισκέπτης':
+                    print("\n ΣΦΑΛΜΑ: ΑΥΤΗ Η ΔΥΝΑΤΟΤΗΤΑ ΕΙΝΑΙ ΜΟΝΟ ΓΙΑ ΕΓΓΕΓΡΑΜΜΕΝΟΥΣ ΧΡΗΣΤΕΣ.\n")
+                elif username != 'Επισκέπτης':
+                    check = 0
+            if mc == '4': 
                 check = 0
-        if mc == '4': 
-            check = 0
-            from Start import startmenu
-        elif mc != '1' and mc != '2' and mc != '3' and mc != '4':
-            print("Άγνωστη επιλογή, προσπάθησε ξανά\n")
+                from Start import startmenu
+            elif mc != '1' and mc != '2' and mc != '3' and mc != '4':
+                print("Άγνωστη επιλογή, προσπάθησε ξανά\n")
+        if rank == 2:
+            print("1. Προβολή Συνταγών")
+            print("2. Δημιουργία Συνταγών")
+            print("3. Οι Συνταγές μου")
+            print("4. Αποσύνδεση")
+            print("5. Admin Panel")
+            mc = input('\nΔιαλέξτε από τις παραπάνω επιλογές: ')
+            if mc == '1':
+                check = 0
+            if mc == '2':
+                if username == 'Επισκέπτης':
+                    print("\n ΣΦΑΛΜΑ: ΔΕΝ ΜΠΟΡΕΙΣ ΝΑ ΔΗΜΙΟΥΡΓΗΣΕΙΣ ΣΥΝΤΑΓΕΣ ΩΣ ΕΠΙΣΚΕΠΤΗΣ.\n")
+                elif username != 'Επισκέπτης':
+                    check = 0
+            if mc == '3':
+                if username == 'Επισκέπτης':
+                    print("\n ΣΦΑΛΜΑ: ΑΥΤΗ Η ΔΥΝΑΤΟΤΗΤΑ ΕΙΝΑΙ ΜΟΝΟ ΓΙΑ ΕΓΓΕΓΡΑΜΜΕΝΟΥΣ ΧΡΗΣΤΕΣ.\n")
+                elif username != 'Επισκέπτης':
+                    check = 0
+            if mc == '4': 
+                check = 0
+                from Start import startmenu
+            elif mc != '1' and mc != '2' and mc != '3' and mc != '4'and mc != '5':
+                print("Άγνωστη επιλογή, προσπάθησε ξανά\n")
