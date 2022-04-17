@@ -19,3 +19,4 @@ def signupproccess():
 connection = sqlite3.connect('RSD.db')
 cursor = connection.cursor()
 signupproccess()
+connection.close

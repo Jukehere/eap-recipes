@@ -15,6 +15,10 @@ def startmenu():
             check = 0
         if c == '3':
             check = 0
+            username = "Επισκέπτης"
+            rank = 1
+            from Menu import mainmenu
+            mainmenu(username, rank)
         if c == '4': 
             break
         elif c != '1' and c != '2' and c != '3' and c != '4':
