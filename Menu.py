@@ -45,17 +45,13 @@ def mainmenu(username, rank):
             if mc == '1':
                 check = 0
             if mc == '2':
-                if username == 'Επισκέπτης':
-                    print("\n ΣΦΑΛΜΑ: ΔΕΝ ΜΠΟΡΕΙΣ ΝΑ ΔΗΜΙΟΥΡΓΗΣΕΙΣ ΣΥΝΤΑΓΕΣ ΩΣ ΕΠΙΣΚΕΠΤΗΣ.\n")
-                elif username != 'Επισκέπτης':
-                    check = 0
+                check = 0
             if mc == '3':
-                if username == 'Επισκέπτης':
-                    print("\n ΣΦΑΛΜΑ: ΑΥΤΗ Η ΔΥΝΑΤΟΤΗΤΑ ΕΙΝΑΙ ΜΟΝΟ ΓΙΑ ΕΓΓΕΓΡΑΜΜΕΝΟΥΣ ΧΡΗΣΤΕΣ.\n")
-                elif username != 'Επισκέπτης':
-                    check = 0
+                check = 0
             if mc == '4': 
                 check = 0
                 from Start import startmenu
+            if mc == '5': 
+                check = 0
             elif mc != '1' and mc != '2' and mc != '3' and mc != '4'and mc != '5':
                 print("Άγνωστη επιλογή, προσπάθησε ξανά\n")
