@@ -3,6 +3,8 @@ import sqlite3
 def signupproccess():
     print("\nΔημιουργία λογαριασμού:\n")
     checkempty = 0
+    connection = sqlite3.connect('RSD.db')
+    cursor = connection.cursor()
     while checkempty == 0:
         username = input("Όνομα χρήστη: ")
         password = input("Κωδικός Πρόσβασης: ")
@@ -15,8 +17,5 @@ def signupproccess():
     print("\nΤώρα μπορείτε να εισέλθετε.\n")
     from Authentication import sgnpvrfctn
     sgnpvrfctn()
+    connection.close
     
-connection = sqlite3.connect('RSD.db')
-cursor = connection.cursor()
-signupproccess()
-connection.close
