@@ -12,10 +12,10 @@ def mainmenu(username, rank):
         temp = cursor.fetchone()
         rank = str(temp[0])
     while check == 1:
+        print("1. Προβολή Συνταγών")
+        print("2. Δημιουργία Συνταγών")
+        print("3. Οι Συνταγές μου")
         if rank != 2:
-            print("1. Προβολή Συνταγών")
-            print("2. Δημιουργία Συνταγών")
-            print("3. Οι Συνταγές μου")
             print("4. Αποσύνδεση")
             mc = input('\nΔιαλέξτε από τις παραπάνω επιλογές: ')
             if mc == '1':
@@ -36,11 +36,7 @@ def mainmenu(username, rank):
             elif mc != '1' and mc != '2' and mc != '3' and mc != '4':
                 print("Άγνωστη επιλογή, προσπάθησε ξανά\n")
         if rank == 2:
-            print("1. Προβολή Συνταγών")
-            print("2. Δημιουργία Συνταγών")
-            print("3. Οι Συνταγές μου")
-            print("4. Αποσύνδεση")
-            print("5. Admin Panel")
+            print("4. Admin Panel")
             mc = input('\nΔιαλέξτε από τις παραπάνω επιλογές: ')
             if mc == '1':
                 check = 0
@@ -50,8 +46,7 @@ def mainmenu(username, rank):
                 check = 0
             if mc == '4': 
                 check = 0
-                from Start import startmenu
-            if mc == '5': 
-                check = 0
-            elif mc != '1' and mc != '2' and mc != '3' and mc != '4'and mc != '5':
+                from Admin import adminmenu
+                adminmenu()
+            elif mc != '1' and mc != '2' and mc != '3' and mc != '4':
                 print("Άγνωστη επιλογή, προσπάθησε ξανά\n")

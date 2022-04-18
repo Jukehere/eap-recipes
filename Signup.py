@@ -12,10 +12,15 @@ def signupproccess():
         if username == '' or password == '':
             print("Βρέθηκε κενό πεδίο. Προσπάθησε ξανά.")
             checkempty = 0
+        cursor.execute('SELECT * FROM Users WHERE Username = ?', (username,))
+        curcheck = cursor.fetchone()
+        if curcheck != None:
+            print("Υπάρχει ήδη χρήστης με το username", username,". Προσπάθησε ξανά.")
+            checkempty = 0
     cursor.execute("""INSERT INTO "Users" VALUES (0, ?, ?)""", (username, password))
     connection.commit()
     print("\nΤώρα μπορείτε να εισέλθετε.\n")
+    connection.close
     from Authentication import sgnpvrfctn
     sgnpvrfctn()
-    connection.close
     
