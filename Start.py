@@ -16,7 +16,7 @@ def startmenu():
         if c == '3':
             check = 1
             username = "Επισκέπτης"
-            rank = 2
+            rank = 1
             from Menu import mainmenu
             mainmenu(username, rank)
         if c == '4': 
