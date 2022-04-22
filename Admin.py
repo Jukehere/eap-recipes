@@ -100,7 +100,8 @@ def adminrecipes():
                             print("1. Αλλαγή Τίτλου")
                             print("2. Αλλαγή Κατηγορίας")
                             print("3. Αλλαγή Συγκεκριμένου Βήματος")
-                            print("4. Πίσω στη διαχείριση")
+                            print("4. Αλλαγή Υλικών")
+                            print("5. Πίσω στη διαχείριση")
                             choice1 = input('\nΔιαλέξτε από τις παραπάνω επιλογές: ')
                             if choice1 == '1':
                                 newtitle = input('\nΕισάγετε τον νέο τίτλο (- για έξοδος): ')
@@ -192,8 +193,17 @@ def adminrecipes():
                                                 elif choice != '1' and choice != '2' and choice != '3':
                                                     print("Άγνωστη επιλογή, προσπάθησε ξανά\n")
                             if choice1 == '4':
+                                ingredients = curcheck[8]
+                                print("\nΥλικά:\n")
+                                print(ingredients)
+                                newingredients = input("\nΕισάγεται τα νέα υλικά (- για έξοδος): ")
+                                if newingredients != '-':
+                                    cursor.execute("UPDATE Recipes SET Ingredients = ? WHERE RID = ?",(newingredients,rid,))
+                                    connection.commit()
+                                    print("Επιτυχής αλλαγή.")
+                            if choice1 == '5':
                                 check3 = 1
-                            elif choice != '1' and choice != '2' and choice != '3' and choice != '4':
+                            elif choice != '1' and choice != '2' and choice != '3' and choice != '4' and choice != '5':
                                 print("Άγνωστη επιλογή, προσπάθησε ξανά\n")
                     if choice == '2':
                         cursor.execute("DELETE FROM Recipes WHERE RID = ?",(rid))
