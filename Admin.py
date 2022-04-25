@@ -33,7 +33,7 @@ def adminusers():
                                 counter = count[0][0]
                                 print("Βρέθηκε/Βρέθηκαν", counter,"Συνταγή/Συνταγές.")
                                 i = 1
-                                for i in range(counter):
+                                for i in range(counter-1):
                                     print("\n",i+1,"η Συνταγή:\n")
                                     print("Τίτλος:", count[i - int(1)][1])
                                     print("Κατηγορία:", count[i - int(1)][4])
@@ -113,36 +113,47 @@ def adminrecipes():
                                     check3 = 1
                             if choice1 == '2':
                                 print("\nΕπιλογές κατηγοριών:\n")
-                                print("1. Βασικές")
-                                print("2. Σούπες")
-                                print("3. Όσπρια")
-                                print("4. Λαχανικά")
-                                print("5. Ζύμες")
-                                print("6. Κρεατικά")
-                                print("7. Ζυμαρικά")
-                                print("8. Γλυκά")
-                                print("9. Διάφορα")
-                                choice2 = input('\nΔιαλέξτε από τις παραπάνω επιλογές: ')
-                                if choice2 == '1':
-                                    category = "Βασικές"
-                                if choice2 == '2':
-                                    category = "Σούπες"
-                                if choice2 == '3':
-                                    category = "Όσπρια"
-                                if choice2 == '4':
-                                    category = "Λαχανικά"
-                                if choice2 == '5':
-                                    category = "Ζύμες"
-                                if choice2 == '6':
-                                    category = "Κρεατικά"
-                                if choice2 == '7':
-                                    category = "Ζυμαρικά"
-                                if choice2 == '8':
-                                    category = "Γλυκά"
-                                if choice2 == '9':
-                                    category = "Διάφορα"
-                                elif choice != '1' and choice != '2' and choice != '3' and choice != '4' and choice != '5' and choice != '6'and choice != '7' and choice != '8' and choice != '9':
-                                    print("Άγνωστη επιλογή, προσπάθησε ξανά\n")
+                                check6 = 0
+                                while check6 == 0:
+                                    print("1. Βασικές")
+                                    print("2. Σούπες")
+                                    print("3. Όσπρια")
+                                    print("4. Λαχανικά")
+                                    print("5. Ζύμες")
+                                    print("6. Κρεατικά")
+                                    print("7. Ζυμαρικά")
+                                    print("8. Γλυκά")
+                                    print("9. Διάφορα")
+                                    choice2 = input('\nΔιαλέξτε από τις παραπάνω επιλογές: ')
+                                    if choice2 == '1':
+                                        category = "Βασικές"
+                                        check6 = 1
+                                    if choice2 == '2':
+                                        category = "Σούπες"
+                                        check6 = 1
+                                    if choice2 == '3':
+                                        category = "Όσπρια"
+                                        check6 = 1
+                                    if choice2 == '4':
+                                        category = "Λαχανικά"
+                                        check6 = 1
+                                    if choice2 == '5':
+                                        category = "Ζύμες"
+                                        check6 = 1
+                                    if choice2 == '6':
+                                        category = "Κρεατικά"
+                                        check6 = 1
+                                    if choice2 == '7':
+                                        category = "Ζυμαρικά"
+                                        check6 = 1
+                                    if choice2 == '8':
+                                        category = "Γλυκά"
+                                        check6 = 1
+                                    if choice2 == '9':
+                                        category = "Διάφορα"
+                                        check6 = 1
+                                    elif choice2 != '1' and choice2 != '2' and choice2 != '3' and choice2 != '4' and choice2 != '5' and choice2 != '6'and choice2 != '7' and choice2 != '8' and choice2 != '9':
+                                        print("Άγνωστη επιλογή, προσπάθησε ξανά\n")
                                 cursor.execute("""UPDATE Recipes SET Category = ? WHERE RID = ?""",(category,rid))
                                 connection.commit()
                                 print("\nΗ αλλαγή κατηγορίας σε", category,"ήταν επιτυχής.")

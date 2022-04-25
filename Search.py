@@ -1,0 +1,106 @@
+import sqlite3
+
+def searchcat():
+    connection = sqlite3.connect('RSD.db')
+    cursor = connection.cursor()
+    print("\nΕπιλογές κατηγοριών:\n")
+    check1 = 0
+    while check1 == 0:
+        print("1. Βασικές")
+        print("2. Σούπες")
+        print("3. Όσπρια")
+        print("4. Λαχανικά")
+        print("5. Ζύμες")
+        print("6. Κρεατικά")
+        print("7. Ζυμαρικά")
+        print("8. Γλυκά")
+        print("9. Διάφορα")
+        choice2 = input('\nΔιαλέξτε από τις παραπάνω επιλογές: ')
+        if choice2 == '1':
+            category = "Βασικές"
+        if choice2 == '2':
+            category = "Σούπες"
+        if choice2 == '3':
+            category = "Όσπρια"
+        if choice2 == '4':
+            category = "Λαχανικά"
+        if choice2 == '5':
+            category = "Ζύμες"
+        if choice2 == '6':
+            category = "Κρεατικά"
+        if choice2 == '7':
+            category = "Ζυμαρικά"
+        if choice2 == '8':
+            category = "Γλυκά"
+        if choice2 == '9':
+            category = "Διάφορα"
+        elif choice2 != '1' and choice2 != '2' and choice2 != '3' and choice2 != '4' and choice2 != '5' and choice2 != '6'and choice2 != '7' and choice2 != '8' and choice2 != '9':
+            print("Άγνωστη επιλογή, προσπάθησε ξανά\n")
+        cursor.execute('SELECT (SELECT COUNT() FROM Steps) AS COUNT, * FROM Recipes WHERE Category = ?',(category,))
+        curcheck = cursor.fetchall()
+        if curcheck == []:
+            print("Δεν υπάρχουν συνταγές στη συγκεκριμένη κατηγορία.")
+        if curcheck != []:
+            curcount = int(curcheck[0][0])
+            i = 1
+            for i in range(curcount-2):
+                print(i+1,". ",curcheck[i][1], " Βαθμολογία: ", curcheck[i][6])
+            check2 = 0
+            while check2 == 0:
+                choice3 = input("Επιλέξτε συνταγή: (- για έξοδος)")
+                if choice3 == "-":
+                    check1 = 1
+                    check2 = 1
+                if choice3 != "-":
+                    if int(choice3) >= 1 and int(choice3) <= i+1:
+                        #send to showrec.py
+                        check1 = 1
+                        check2 = 1
+                    if int(choice3) < 1 or int(choice3) > i:
+                        print("Λάθος επιλογή, προσπάθησε ξανά.")
+                        
+def searchrid():
+    connection = sqlite3.connect('RSD.db')
+    cursor = connection.cursor()
+    check = 0
+    while check == 0:
+        rid = input('\nRID (- για έξοδο): ')
+        if rid != '-':
+            cursor.execute('SELECT * FROM Recipes WHERE RID = ?', (rid,))
+            curcheck = cursor.fetchone()
+            if curcheck == None:
+                print("Δεν βρέθηκε το RID. Προσπάθησε ξανά.")
+            if curcheck != None:
+                #send to showrec.py
+                check = 0
+        if rid == '-':
+            check = 1
+            
+def searchrandom():
+    connection = sqlite3.connect('RSD.db')
+    cursor = connection.cursor()
+    cursor.execute('SELECT * FROM Recipes ORDER BY RANDOM() LIMIT 1')
+    curcheck = cursor.fetchone()
+    #send to showrec.py
+            
+
+
+def searchmenu():
+    print("\nSearch Menu\n")
+    check = 0
+    while check == 0:
+        print("1. Επιλογή κατηγορίας")
+        print("2. Εμφάνιση συνταγής μέσω RID")
+        print("3. Εμφάνιση τυχαίας συνταγής")
+        print("4. Έξοδος από το πρόγραμμα")
+        choice = input('\nΔιαλέξτε από τις παραπάνω επιλογές: ')
+        if choice == '1':
+            searchcat()
+        if choice == '2':
+            searchrid()
+        if choice == '3':
+            searchrandom()
+        if choice == '4': 
+            break
+        elif choice != '1' and choice != '2' and choice != '3' and choice != '4':
+            print("Άγνωστη επιλογή, προσπάθησε ξανά\n")

@@ -20,6 +20,8 @@ def mainmenu(username, rank):
             mc = input('\nΔιαλέξτε από τις παραπάνω επιλογές: ')
             if mc == '1':
                 check = 0
+                from Search import searchmenu
+                searchmenu()
             if mc == '2':
                 if username == 'Επισκέπτης':
                     print("\n ΣΦΑΛΜΑ: ΔΕΝ ΜΠΟΡΕΙΣ ΝΑ ΔΗΜΙΟΥΡΓΗΣΕΙΣ ΣΥΝΤΑΓΕΣ ΩΣ ΕΠΙΣΚΕΠΤΗΣ.\n")
