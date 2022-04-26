@@ -31,7 +31,8 @@ def mainmenu(username, rank):
                 if username == 'Επισκέπτης':
                     print("\n ΣΦΑΛΜΑ: ΑΥΤΗ Η ΔΥΝΑΤΟΤΗΤΑ ΕΙΝΑΙ ΜΟΝΟ ΓΙΑ ΕΓΓΕΓΡΑΜΜΕΝΟΥΣ ΧΡΗΣΤΕΣ.\n")
                 elif username != 'Επισκέπτης':
-                    check = 0
+                    from Myrec import myrecmenu
+                    myrecmenu(username)
             if mc == '4': 
                 check = 0
                 from Start import startmenu
@@ -46,6 +47,8 @@ def mainmenu(username, rank):
                 check = 0
             if mc == '3':
                 check = 0
+                from Myrec import myrecmenu
+                myrecmenu(username)
             if mc == '4': 
                 check = 0
                 from Admin import adminmenu
