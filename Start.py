@@ -1,28 +1,31 @@
-def startmenu():
-    check = 0
-    print("Σύστημα καταγραφής συνταγών μαγειρικής\n")
-    while check == 0:
-        print("1. Είσοδος με στοιχεία χρήστη")
-        print("2. Εγγραφή")
-        print("3. Είσοδος ως επισκέπτης")
-        print("4. Έξοδος από το πρόγραμμα")
-        c = input('\nΔιαλέξτε από τις παραπάνω επιλογές: ')
-        if c == '1':
-            check = 1
-        if c == '2':
-            from Signup import signupproccess
-            signupproccess()
-            check = 1
-        if c == '3':
-            check = 1
-            username = "Επισκέπτης"
-            rank = 1
-            from Menu import mainmenu
-            mainmenu(username, rank)
-        if c == '4': 
-            break
-        elif c != '1' and c != '2' and c != '3' and c != '4':
-            print("Άγνωστη επιλογή, προσπάθησε ξανά\n")
-        
+import tkinter
 
-startmenu()
+def signinbutton():
+    from Authentication import sgnpvrfctn
+    root.destroy()
+    sgnpvrfctn()
+
+def signupbutton():
+    from Signup import signupproccess
+    root.destroy()
+    signupproccess()
+    
+def guestbutton():
+    username = "Επισκέπτης"
+    rank = 1
+    from Menu import mainmenu
+    root.destroy()
+    mainmenu(username, rank)
+    
+root = tkinter.Tk()
+mainlabel = tkinter.Label(root, text="Σύστημα καταγραφής συνταγών μαγειρικής")
+mainlabel.grid(row=0, column=0)
+signinb = tkinter.Button(root, text="Είσοδος με στοιχεία χρήστη", padx=50, command= signinbutton)
+signinb.grid(row=1, column=0)
+signupb = tkinter.Button(root, text="Εγγραφή", padx=50, command= signupbutton)
+signupb.grid(row=2, column=0)
+gurstb = tkinter.Button(root, text="Είσοδος ως επισκέπτης", padx=50, command= guestbutton)
+gurstb.grid(row=3, column=0)
+closeb = tkinter.Button(root, text="Έξοδος από το πρόγραμμα", padx=50, command= root.destroy)
+closeb.grid(row=4, column=0)
+root.mainloop()
