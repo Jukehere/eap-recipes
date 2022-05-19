@@ -65,7 +65,6 @@ def myrecmenu(username):
         print("4. Έξοδος από το πρόγραμμα")
         choice = input('\nΔιαλέξτε από τις παραπάνω επιλογές: ')
         if choice == '1':
-            username = 'Juke'
             myrecrecipes(username)
         if choice == '2':
             myrecpass(username)

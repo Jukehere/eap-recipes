@@ -17,15 +17,19 @@ def guestbutton():
     root.destroy()
     mainmenu(username, rank)
     
+def main():
+    pass
+    
 root = tkinter.Tk()
-mainlabel = tkinter.Label(root, text="Σύστημα καταγραφής συνταγών μαγειρικής")
-mainlabel.grid(row=0, column=0)
+root.title('Σύστημα καταγραφής συνταγών μαγειρικής')
+mainlabel = tkinter.Label(root, text="Σύστημα καταγραφής συνταγών μαγειρικής", font=1)
+mainlabel.grid(row=0, column=1)
 signinb = tkinter.Button(root, text="Είσοδος με στοιχεία χρήστη", padx=50, command= signinbutton)
-signinb.grid(row=1, column=0)
+signinb.grid(row=1, column=1, padx=5, pady=5)
 signupb = tkinter.Button(root, text="Εγγραφή", padx=50, command= signupbutton)
-signupb.grid(row=2, column=0)
+signupb.grid(row=2, column=1, padx=5, pady=5)
 gurstb = tkinter.Button(root, text="Είσοδος ως επισκέπτης", padx=50, command= guestbutton)
-gurstb.grid(row=3, column=0)
+gurstb.grid(row=3, column=1, padx=5, pady=5)
 closeb = tkinter.Button(root, text="Έξοδος από το πρόγραμμα", padx=50, command= root.destroy)
-closeb.grid(row=4, column=0)
+closeb.grid(row=4, column=1, padx=5, pady=5)
 root.mainloop()

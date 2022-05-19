@@ -1,4 +1,5 @@
 import sqlite3
+import tkinter
 
 def searchcat():
     connection = sqlite3.connect('RSD.db')
@@ -56,7 +57,7 @@ def searchcat():
                         #send to showrec.py
                         check1 = 1
                         check2 = 1
-                    if int(choice3) < 1 or int(choice3) > i:
+                    if int(choice3) < 1 or int(choice3) > i+1:
                         print("Λάθος επιλογή, προσπάθησε ξανά.")
                         
 def searchrid():
@@ -86,21 +87,34 @@ def searchrandom():
 
 
 def searchmenu():
-    print("\nSearch Menu\n")
-    check = 0
-    while check == 0:
-        print("1. Επιλογή κατηγορίας")
-        print("2. Εμφάνιση συνταγής μέσω RID")
-        print("3. Εμφάνιση τυχαίας συνταγής")
-        print("4. Έξοδος από το πρόγραμμα")
-        choice = input('\nΔιαλέξτε από τις παραπάνω επιλογές: ')
-        if choice == '1':
-            searchcat()
-        if choice == '2':
-            searchrid()
-        if choice == '3':
-            searchrandom()
-        if choice == '4': 
-            break
-        elif choice != '1' and choice != '2' and choice != '3' and choice != '4':
-            print("Άγνωστη επιλογή, προσπάθησε ξανά\n")
+    mainlabel = tkinter.Label(root, text=('Search Menu'), font=1)
+    mainlabel.grid(row=0, column=1)
+    recchoiceb = tkinter.Button(root, text="Επιλογή κατηγορίας", padx=50, command= searchcat)
+    recchoiceb.grid(row=1, column=1, padx=5, pady=5)
+    ridsearchb = tkinter.Button(root, text="Εμφάνιση συνταγής μέσω RID", padx=50, command= searchrid)
+    ridsearchb.grid(row=2, column=1, padx=5, pady=5)
+    randomb = tkinter.Button(root, text="Εμφάνιση τυχαίας συνταγής", padx=50, command= searchrandom)
+    randomb.grid(row=3, column=1, padx=5, pady=5)
+    closeb = tkinter.Button(root, text="Έξοδος από το πρόγραμμα", padx=50, command= root.destroy)
+    closeb.grid(row=4, column=1, padx=5, pady=5)
+    #print("\nSearch Menu\n")
+    #check = 0
+    #while check == 0:
+    #    print("1. Επιλογή κατηγορίας")
+    #    print("2. Εμφάνιση συνταγής μέσω RID")
+    #    print("3. Εμφάνιση τυχαίας συνταγής")
+    #    print("4. Έξοδος από το πρόγραμμα")
+    #    choice = input('\nΔιαλέξτε από τις παραπάνω επιλογές: ')
+    #    if choice == '1':
+    #        searchcat()
+    #    if choice == '2':
+    #        searchrid()
+    #    if choice == '3':
+    #        searchrandom()
+    #    if choice == '4': 
+    #        break
+    #    elif choice != '1' and choice != '2' and choice != '3' and choice != '4':
+    #        print("Άγνωστη επιλογή, προσπάθησε ξανά\n")
+    
+root = tkinter.Tk()
+root.title('Σύστημα καταγραφής συνταγών μαγειρικής')

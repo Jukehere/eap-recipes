@@ -1,57 +1,53 @@
-from tracemalloc import start
-import sqlite3
+import tkinter
+from tkinter import messagebox
 
+def recbutton():
+    root.destroy()
+    from Search import searchmenu
+    searchmenu()
+
+def createbutton(rank):
+    if rank != 1:
+        root.destroy()
+        #Send to Create.py
+    if rank == 1:
+        messagebox.showerror("Error" , "ΔΕΝ ΜΠΟΡΕΙΣ ΝΑ ΔΗΜΙΟΥΡΓΗΣΕΙΣ ΣΥΝΤΑΓΕΣ ΩΣ ΕΠΙΣΚΕΠΤΗΣ." , parent = root)
+
+def myrecbutton(username,rank):
+    if rank != 1:
+        root.destroy()
+        from Myrec import myrecmenu
+        myrecmenu(username)
+    if rank == 1:
+        messagebox.showerror("Error" , "ΑΥΤΗ Η ΔΥΝΑΤΟΤΗΤΑ ΕΙΝΑΙ ΜΟΝΟ ΓΙΑ ΕΓΓΕΓΡΑΜΜΕΝΟΥΣ ΧΡΗΣΤΕΣ." , parent = root)
+
+def discbutton():
+    root.destroy()
+    from Start import main
+    main()
+
+def adminbutton():
+    root.destroy()
+    from Admin import adminmenu
+    adminmenu()
 
 def mainmenu(username, rank):
-    connection = sqlite3.connect('RSD.db')
-    cursor = connection.cursor()
-    check = 1
-    print("\nΚαλωσόρισες", username,"\n")
-    if username != 'Επισκέπτης':
-        cursor.execute("""SELECT Rank FROM Users WHERE Username = (?)""",(username,))
-        temp = cursor.fetchone()
-        rank = str(temp[0])
-    while check == 1:
-        print("1. Προβολή Συνταγών")
-        print("2. Δημιουργία Συνταγών")
-        print("3. Οι Συνταγές μου")
-        if rank != 2:
-            print("4. Αποσύνδεση")
-            mc = input('\nΔιαλέξτε από τις παραπάνω επιλογές: ')
-            if mc == '1':
-                check = 0
-                from Search import searchmenu
-                searchmenu()
-            if mc == '2':
-                if username == 'Επισκέπτης':
-                    print("\n ΣΦΑΛΜΑ: ΔΕΝ ΜΠΟΡΕΙΣ ΝΑ ΔΗΜΙΟΥΡΓΗΣΕΙΣ ΣΥΝΤΑΓΕΣ ΩΣ ΕΠΙΣΚΕΠΤΗΣ.\n")
-                elif username != 'Επισκέπτης':
-                    check = 0
-            if mc == '3':
-                if username == 'Επισκέπτης':
-                    print("\n ΣΦΑΛΜΑ: ΑΥΤΗ Η ΔΥΝΑΤΟΤΗΤΑ ΕΙΝΑΙ ΜΟΝΟ ΓΙΑ ΕΓΓΕΓΡΑΜΜΕΝΟΥΣ ΧΡΗΣΤΕΣ.\n")
-                elif username != 'Επισκέπτης':
-                    from Myrec import myrecmenu
-                    myrecmenu(username)
-            if mc == '4': 
-                check = 0
-                from Start import startmenu
-            elif mc != '1' and mc != '2' and mc != '3' and mc != '4':
-                print("Άγνωστη επιλογή, προσπάθησε ξανά\n")
-        if rank == 2:
-            print("4. Admin Panel")
-            mc = input('\nΔιαλέξτε από τις παραπάνω επιλογές: ')
-            if mc == '1':
-                check = 0
-            if mc == '2':
-                check = 0
-            if mc == '3':
-                check = 0
-                from Myrec import myrecmenu
-                myrecmenu(username)
-            if mc == '4': 
-                check = 0
-                from Admin import adminmenu
-                adminmenu()
-            elif mc != '1' and mc != '2' and mc != '3' and mc != '4':
-                print("Άγνωστη επιλογή, προσπάθησε ξανά\n")
+    mainlabel = tkinter.Label(root, text=('Καλοσόρισες',username), font=1)
+    mainlabel.grid(row=0, column=1)
+    recb = tkinter.Button(root, text="Προβολή Συνταγών", padx=50, command= recbutton)
+    recb.grid(row=1, column=1, padx=5, pady=5)
+    createb = tkinter.Button(root, text="Δημιουργία Συνταγών", padx=50, command= lambda: createbutton(rank))
+    createb.grid(row=2, column=1, padx=5, pady=5)
+    myrecb = tkinter.Button(root, text="Οι Συνταγές μου", padx=50, command= lambda: myrecbutton(username,rank))
+    myrecb.grid(row=3, column=1, padx=5, pady=5)
+    if rank != 2:
+        discb = tkinter.Button(root, text="Αποσύνδεση", padx=50, command= discbutton)
+        discb.grid(row=4, column=1, padx=5, pady=5)
+    if rank == 2:
+        adminb = tkinter.Button(root, text="Admin Panel", padx=50, command= adminbutton)
+        adminb.grid(row=4, column=1, padx=5, pady=5)
+    pass
+
+root = tkinter.Tk()
+root.title('Σύστημα καταγραφής συνταγών μαγειρικής')
+

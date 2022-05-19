@@ -1,7 +1,4 @@
-from hashlib import new
-from itertools import count
 import sqlite3
-from unicodedata import category
 
 def adminusers():
     connection = sqlite3.connect('RSD.db')
@@ -310,7 +307,7 @@ def adminmenu():
             adminratings()
         if mc == '4': 
             check = 1
-            from Start import startmenu
+            from Start import main
         elif mc != '1' and mc != '2' and mc != '3' and mc != '4':
             print("Άγνωστη επιλογή, προσπάθησε ξανά\n")
 
