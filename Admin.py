@@ -1,4 +1,6 @@
 import sqlite3
+from struct import pack
+import tkinter
 
 def adminusers():
     connection = sqlite3.connect('RSD.db')
@@ -289,25 +291,22 @@ def adminratings():
         if rid == '-':
             check = 1
     connection.close()
+    
+def discbutton(root):
+    root.destroy()
+    from Start import main
 
 def adminmenu():
-    print("\nAdmin Panel")
-    check = 0
-    while check == 0:
-        print("\n1. Διαχείριση Συνταγών (Χρειάζεται RID)")
-        print("2. Διαχείριση Χρηστών")
-        print("3. Διαχείριση Αξιολογήσεων")
-        print("4. Αποσύνδεση")
-        mc = input('\nΔιαλέξτε από τις παραπάνω επιλογές: ')
-        if mc == '1':
-            adminrecipes()
-        if mc == '2':
-            adminusers()
-        if mc == '3':
-            adminratings()
-        if mc == '4': 
-            check = 1
-            from Start import main
-        elif mc != '1' and mc != '2' and mc != '3' and mc != '4':
-            print("Άγνωστη επιλογή, προσπάθησε ξανά\n")
+    root = tkinter.Tk()
+    root.title('Σύστημα καταγραφής συνταγών μαγειρικής')
+    mainlabel = tkinter.Label(root, text=('Admin Panel'), font=1)
+    mainlabel.grid(row=0, column=1)
+    recb = tkinter.Button(root, text="Διαχείριση Συνταγών (Χρειάζεται RID)", padx=50, command= adminrecipes)
+    recb.grid(row=1, column=1, padx=5, pady=5)
+    usersb = tkinter.Button(root, text="Διαχείριση Χρηστών", padx=50, command= adminusers)
+    usersb.grid(row=2, column=1, padx=5, pady=5)
+    ratingsb = tkinter.Button(root, text="Διαχείριση Αξιολογήσεων", padx=50, command= adminratings)
+    ratingsb.grid(row=3, column=1, padx=5, pady=5)
+    discb = tkinter.Button(root, text="Αποσύνδεση", padx=50, command= lambda: discbutton(root))
+    discb.grid(row=4, column=1, padx=5, pady=5)
 
