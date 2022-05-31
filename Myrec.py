@@ -28,7 +28,7 @@ def myrecpass(username,root):
     def close(username):
         mrp.destroy()
         myrecmenu(username)
-    def changepass(username):
+    def changepass(newpass,username):
         connection = sqlite3.connect('RSD.db')
         cursor = connection.cursor()
         cursor.execute("UPDATE Users SET Password = ? WHERE Username = ?",(newpass,username,))
@@ -80,11 +80,11 @@ def myrecrecipes(username,root):
         table.heading(1, text="Name")
         table.heading(2, text="User")
         table.heading(3, text="RID")
-        table.heading(4, text="test")
-        table.heading(5, text="test")
+        table.heading(4, text="Category")
+        table.heading(5, text="")
         table.heading(6, text="Rating")
-        table.heading(7, text="Rating")
-        table.heading(8, text="Rating")
+        table.heading(7, text="")
+        table.heading(8, text="Views")
         table.column(1)
         table.column(2, minwidth=0, width=0)
         table.column(3)
