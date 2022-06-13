@@ -1,7 +1,4 @@
-from email import message
-from fileinput import close
 import sqlite3
-from struct import pack
 import tkinter
 from tkinter import messagebox
 from tkinter import ttk
