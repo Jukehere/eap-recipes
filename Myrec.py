@@ -19,9 +19,9 @@ def myrecdelete(username,root):
     delete.title('Σύστημα καταγραφής συνταγών μαγειρικής')
     mainlabel = tkinter.Label(delete, text="Διαγραφή Λογαριασμού?", font=1)
     mainlabel.grid(row=0, column=1)
-    signupb = tkinter.Button(root, text = "Ναι", command = lambda: deleteacc(username))
+    signupb = tkinter.Button(delete, text = "Ναι", command = lambda: deleteacc(username))
     signupb.grid(row=2, column=2, padx=5, pady=5)
-    backb = tkinter.Button(root, text = "Όχι", command = lambda: close(username))
+    backb = tkinter.Button(delete, text = "Όχι", command = lambda: close(username))
     backb.grid(row=2, column=0, padx=5, pady=5)
 
 def myrecpass(username,root):
