@@ -9,7 +9,8 @@ def searchcat(root):
             cursor.execute('SELECT * FROM Recipes WHERE RID = ?',(select,))
             curcheck = cursor.fetchone()
             if curcheck != None:
-                #send to showrec.py
+                from Showrec import Show_rec
+                Show_rec(select)
                 show.destroy()
             if curcheck == None:
                 messagebox.showerror("Error" , "Το RID δεν βρέθηκε, προσπάθησε ξανά." , parent = show)
@@ -26,20 +27,26 @@ def searchcat(root):
             show.title('Σύστημα καταγραφής συνταγών μαγειρικής')
             showlabel = tkinter.Label(show, text=('Συνταγές:'), font=1)
             showlabel.grid(row=0, column=1)
-            table = ttk.Treeview(show, columns=(1,2,3,4,5,6), show="headings", height=5)
+            table = ttk.Treeview(show, columns=(1,2,3,4,5,6,7,8,9), show="headings", height=5)
             table.grid(row=1, column=1, padx=10, pady=10)
-            table.heading(1, text="Name")
-            table.heading(2, text="User")
-            table.heading(3, text="RID")
-            table.heading(4, text="test")
-            table.heading(5, text="test")
-            table.heading(6, text="Rating")
+            table.heading(1, text="RID")
+            table.heading(2, text="Name")
+            table.heading(3, text="Category")
+            table.heading(4, text="Difficulty")
+            table.heading(5, text="TimeH")
+            table.heading(6, text="TimeM")
+            table.heading(7, text="NOI")
+            table.heading(8, text="NOS")
+            table.heading(9, text="User")
             table.column(1)
             table.column(2)
             table.column(3)
-            table.column(4, minwidth=0, width=0)
+            table.column(4)
             table.column(5, minwidth=0, width=0)
-            table.column(6)
+            table.column(6, minwidth=0, width=0)
+            table.column(7, minwidth=0, width=0)
+            table.column(8, minwidth=0, width=0)
+            table.column(9)
             for i in curcheck:
                 table.insert('', 'end', values=i)
             selectl = tkinter.Label(show, text="RID:")
@@ -52,7 +59,7 @@ def searchcat(root):
             backb = tkinter.Button(show, text = "Go Back", command = close)
             backb.grid(row=3, column=0, padx=5, pady=5)
     root.destroy()
-    connection = sqlite3.connect('RSD.db')
+    connection = sqlite3.connect('dishes.db')
     cursor = connection.cursor()
     cat = tkinter.Tk()
     cat.title('Σύστημα καταγραφής συνταγών μαγειρικής')
@@ -77,10 +84,11 @@ def searchrid(root):
             messagebox.showerror("Error" , "Το RID δεν βρέθηκε, προσπάθησε ξανά." , parent = srid)
         else:
             srid.destroy()
-            #send to showrec.py
+            from Showrec import Show_rec
+            Show_rec(rid.get())
             pass
         pass
-    connection = sqlite3.connect('RSD.db')
+    connection = sqlite3.connect('dishes.db')
     cursor = connection.cursor()
     srid = tkinter.Tk()
     srid.title('Σύστημα καταγραφής συνταγών μαγειρικής')
@@ -98,11 +106,12 @@ def searchrid(root):
             
 def searchrandom(root):
     root.destroy()
-    connection = sqlite3.connect('RSD.db')
+    connection = sqlite3.connect('dishes.db')
     cursor = connection.cursor()
     cursor.execute('SELECT * FROM Recipes ORDER BY RANDOM() LIMIT 1')
     curcheck = cursor.fetchone()
-    #send to showrec.py
+    from Showrec import Show_rec
+    Show_rec(curcheck[0])
             
 
 

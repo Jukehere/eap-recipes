@@ -9,7 +9,7 @@ def recbutton(root):
 def createbutton(rank,root):
     if rank != 1:
         root.destroy()
-        #Send to Create.py
+        from Create import Create_
     if rank == 1:
         messagebox.showerror("Error" , "ΔΕΝ ΜΠΟΡΕΙΣ ΝΑ ΔΗΜΙΟΥΡΓΗΣΕΙΣ ΣΥΝΤΑΓΕΣ ΩΣ ΕΠΙΣΚΕΠΤΗΣ." , parent = root)
 
