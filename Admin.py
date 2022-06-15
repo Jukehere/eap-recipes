@@ -231,109 +231,6 @@ def adminrecipes(root):
     backb = tkinter.Button(show, text = "Go Back", command = closeshow)
     backb.grid(row=3, column=0, padx=5, pady=5)
     
-def adminratings(root):
-    def search():
-        def ratingsmenu():
-            def deletemassratings():
-                choice = messagebox.askquestion("Choice","Είστε σίγουρος ότι θέλετε να διαγράψετε όλες τις αξιολογήσεις για το συγκεκριμένο RID?", parent = rmenu)
-                if choice == "yes":
-                    cursor.execute("DELETE FROM Ratings WHERE RID = ?",(rid.get(),))
-                    connection.commit()
-                    messagebox.showinfo(title="Success", message="Οι αξιολογίσεις διαγράφηκαν.", parent = rmenu)
-                    rmenu.destroy()
-                    adminmenu()
-            def deleterating():
-                def searchratings():
-                    cursor.execute('SELECT * FROM Ratings WHERE RID = ? AND Stars = ?',(rid.get(),stars.get(),))
-                    curcheck1 = cursor.fetchone()
-                    if curcheck1 == []:
-                        messagebox.showerror("Error" , "Δεν βρέθηκε αξιολόγηση με τα εξής αστέρια." , parent = rmenu)
-                    if curcheck1 != []:
-                        cursor.execute("DELETE FROM Ratings WHERE rowid in (select rowid from Ratings WHERE RID = ? AND Stars = ? LIMIT 1)",(rid.get(),stars.get(),))
-                        connection.commit()
-                        messagebox.showinfo(title="Success", message="Η αξιολόγηση διαγράφηκε.", parent = delratings)
-                        delratings.destroy()
-                        ratingsmenu()
-                delratings = tkinter.Tk()
-                delratings.title('Σύστημα καταγραφής συνταγών μαγειρικής')
-                mainlabelsrid = tkinter.Label(delratings, text="Αναζήτηση αξιολογήσεων", font=1)
-                mainlabelsrid.grid(row=0, column=1)
-                starsl = tkinter.Label(delratings, text="Stars:")
-                starsl.grid(row=1, column=0)
-                stars = tkinter.StringVar()
-                stars = tkinter.Entry(delratings, width=30 , textvariable=stars)
-                stars.grid(row=1, column=1)
-                searchb = tkinter.Button(delratings, text = "Search", command = searchratings)
-                searchb.grid(row=2, column=2, padx=5, pady=5)
-                backb = tkinter.Button(delratings, text = "Go Back", command = close)
-                backb.grid(row=2, column=0, padx=5, pady=5)
-            def seeratings():
-                def closeshow():
-                    show.destroy()
-                    ratingsmenu()
-                cursor.execute('SELECT * FROM Ratings WHERE RID = ?',(rid.get(),))
-                curcheck = cursor.fetchall()
-                if curcheck == []:
-                    messagebox.showerror("Error" , "Δεν υπάρχουν αξιολογήσεις στο Σύστημα." , parent = rmenu)
-                if curcheck != []:
-                    rmenu.destroy()
-                    show = tkinter.Tk()
-                    show.title('Σύστημα καταγραφής συνταγών μαγειρικής')
-                    showlabel = tkinter.Label(show, text=('Ratings:'), font=1)
-                    showlabel.grid(row=0, column=1)
-                    table = ttk.Treeview(show, columns=(1,2), show="headings", height=5)
-                    table.grid(row=1, column=1, padx=10, pady=10)
-                    table.heading(1, text="RID")
-                    table.heading(2, text="Stars")
-                    for i in curcheck:
-                        table.insert('', 'end', values=i)
-                    backb = tkinter.Button(show, text = "Go Back to Admin Ratings Menu", command = closeshow)
-                    backb.grid(row=3, column=0, padx=5, pady=5)
-            def closemenu():
-                rmenu.destroy()
-                adminmenu
-            cursor.execute('SELECT (SELECT COUNT() FROM Ratings) AS COUNT, * FROM Ratings WHERE RID = ?',(rid.get(),))
-            curcheck = cursor.fetchall()
-            counter = curcheck[0][0]
-            rmenu = tkinter.Tk()
-            rmenu.title('Σύστημα καταγραφής συνταγών μαγειρικής')
-            mainlabel = tkinter.Label(rmenu, text=("Βρέθηκε/Βρέθηκαν", counter,"Αξιολόγηση/Αξιολογίσεις."), font=1)
-            mainlabel.grid(row=0, column=1)
-            recipesb = tkinter.Button(rmenu, text="Εμφάνιση Αξιολογίσεων", padx=50, command= seeratings)
-            recipesb.grid(row=1, column=1, padx=5, pady=5)
-            deleterb = tkinter.Button(rmenu, text="Διαγραφή Αξιολόγησης (Χρειάζεται αριθμός αστεριών)", padx=50, command= deleterating)
-            deleterb.grid(row=2, column=1, padx=5, pady=5)
-            deleteb = tkinter.Button(rmenu, text="Μαζική Διαγραφή Αξιολογήσεων", padx=50, command= deletemassratings)
-            deleteb.grid(row=3, column=1, padx=5, pady=5)
-            discb = tkinter.Button(rmenu, text="Πίσω στο Admin Panel", padx=50, command= closemenu)
-            discb.grid(row=4, column=1, padx=5, pady=5)
-        cursor.execute('SELECT * FROM Ratings WHERE RID = ?', (rid.get(),))
-        curcheck = cursor.fetchone()
-        if curcheck == None:
-            messagebox.showerror("Error" , "Δεν βρέθηκαν αξιολογίσεις για το συγκεκριμένο RID, προσπάθησε ξανά." , parent = ratings)
-        else:
-            ratings.destroy()
-            ratingsmenu(curcheck)
-    def close():
-        ratings.destroy()
-        adminmenu()
-    root.destroy()
-    connection = sqlite3.connect('RSD.db')
-    cursor = connection.cursor()
-    ratings = tkinter.Tk()
-    ratings.title('Σύστημα καταγραφής συνταγών μαγειρικής')
-    mainlabelsrid = tkinter.Label(ratings, text="Αναζήτηση αξιολογήσεων", font=1)
-    mainlabelsrid.grid(row=0, column=1)
-    ridl = tkinter.Label(ratings, text="RID:")
-    ridl.grid(row=1, column=0)
-    rid = tkinter.StringVar()
-    rid = tkinter.Entry(ratings, width=30 , textvariable=rid)
-    rid.grid(row=1, column=1)
-    searchb = tkinter.Button(ratings, text = "Search", command = search)
-    searchb.grid(row=2, column=2, padx=5, pady=5)
-    backb = tkinter.Button(ratings, text = "Go Back", command = close)
-    backb.grid(row=2, column=0, padx=5, pady=5)
-    
 def discbutton(root):
     root.destroy()
     from Start import main
@@ -347,8 +244,6 @@ def adminmenu():
     recb.grid(row=1, column=1, padx=5, pady=5)
     usersb = tkinter.Button(root, text="Διαχείριση Χρηστών", padx=50, command= lambda: adminusers(root))
     usersb.grid(row=2, column=1, padx=5, pady=5)
-    ratingsb = tkinter.Button(root, text="Διαχείριση Αξιολογήσεων", padx=50, command= lambda: adminratings(root))
-    ratingsb.grid(row=3, column=1, padx=5, pady=5)
     discb = tkinter.Button(root, text="Αποσύνδεση", padx=50, command= lambda: discbutton(root))
-    discb.grid(row=4, column=1, padx=5, pady=5)
+    discb.grid(row=3, column=1, padx=5, pady=5)
 
