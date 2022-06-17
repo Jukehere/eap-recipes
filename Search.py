@@ -2,19 +2,14 @@ import sqlite3
 import tkinter
 from tkinter import Button, OptionMenu, StringVar, messagebox
 from tkinter import ttk
-
+import Showrec as SR
 
 def searchcat(root):
     def searchcatsel(selection):
-        def submitsel(select):
-            cursor.execute('SELECT * FROM Recipes WHERE RID = ?',(select,))
-            curcheck = cursor.fetchone()
-            if curcheck != None:
-                from Showrec import Show_rec
-                Show_rec(select)
-                show.destroy()
-            if curcheck == None:
-                messagebox.showerror("Error" , "Το RID δεν βρέθηκε, προσπάθησε ξανά." , parent = show)
+        def submitsel():
+            show.destroy()
+            from CatRSel import maincatrsel
+            maincatrsel()
         def close():
             show.destroy()
             searchmenu()
@@ -50,12 +45,7 @@ def searchcat(root):
             table.column(9)
             for i in curcheck:
                 table.insert('', 'end', values=i)
-            selectl = tkinter.Label(show, text="RID:")
-            selectl.grid(row=2, column=0)
-            select = tkinter.StringVar()
-            select = tkinter.Entry(show, width=30 , textvariable=select)
-            select.grid(row=2, column=1)
-            submitb = tkinter.Button(show, text = "Submit", command = lambda: submitsel(select.get()))
+            submitb = tkinter.Button(show, text = "Next", command = lambda: submitsel())
             submitb.grid(row=3, column=2, padx=5, pady=5)
             backb = tkinter.Button(show, text = "Go Back", command = close)
             backb.grid(row=3, column=0, padx=5, pady=5)
@@ -85,8 +75,7 @@ def searchrid(root):
             messagebox.showerror("Error" , "Το RID δεν βρέθηκε, προσπάθησε ξανά." , parent = srid)
         else:
             srid.destroy()
-            from ShowRec import Show_rec
-            Show_rec(rid.get)
+            SR.Show_rec(curcheck[0])
             pass
         pass
     connection = sqlite3.connect('dishes.db')
