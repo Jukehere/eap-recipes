@@ -2,6 +2,7 @@ import sqlite3
 import tkinter
 from tkinter import Button, OptionMenu, StringVar, messagebox
 from tkinter import ttk
+import ShowRec as SR
 
 def searchcat(root):
     def searchcatsel(selection):
@@ -84,8 +85,7 @@ def searchrid(root):
             messagebox.showerror("Error" , "Το RID δεν βρέθηκε, προσπάθησε ξανά." , parent = srid)
         else:
             srid.destroy()
-            from Showrec import Show_rec
-            Show_rec(rid.get())
+            SR.Show_rec(rid.get())
             pass
         pass
     connection = sqlite3.connect('dishes.db')

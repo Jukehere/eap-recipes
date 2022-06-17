@@ -16,8 +16,8 @@ class Recipe():
         self.createsteps()
 
     def createsteps(self):
-        insertwindow2 = Toplevel()
-        insertwindow2.title("Δημιουργία Βημάτων")
+        self.insertwindow2 = Toplevel()
+        self.insertwindow2.title("Δημιουργία Βημάτων")
         self.nl = []
         self.ne = []
         self.ql = []
@@ -29,49 +29,48 @@ class Recipe():
         self.ol = []
         self.oe = []
         for i in range(self.nos):
-            a = Label(insertwindow2, text = "Τίτλος βήματος")
+            a = Label(self.insertwindow2, text = "Τίτλος βήματος")
             self.nl.append(a)
             self.nl[i].grid(row = i, sticky = W)
-            b = Entry(insertwindow2)
+            b = Entry(self.insertwindow2)
             self.ne.append(b)
             self.ne[i].grid(row = i, column = 1)
-            c = Label(insertwindow2, text = "Περιγραφή")
+            c = Label(self.insertwindow2, text = "Περιγραφή")
             self.ql.append(c)
             self.ql[i].grid(row = i, column = 2)
-            d = Entry(insertwindow2)
+            d = Entry(self.insertwindow2)
             self.qe.append(d)
             self.qe[i].grid(row = i, column = 3)
-            e = Label(insertwindow2, text = "Χρόνος σε ώρες")
+            e = Label(self.insertwindow2, text = "Χρόνος σε ώρες")
             self.dl.append(e)
             self.dl[i].grid(row = i, column = 4)
-            f = Entry(insertwindow2)
+            f = Entry(self.insertwindow2)
             self.de.append(f)
             self.de[i].grid(row = i, column = 5)
-            g = Label(insertwindow2, text = "Χρόνος σε λεπτά")
+            g = Label(self.insertwindow2, text = "Χρόνος σε λεπτά")
             self.ml.append(g)
             self.ml[i].grid(row = i, column = 6)
-            h = Entry(insertwindow2)
+            h = Entry(self.insertwindow2)
             self.me.append(h)
             self.me[i].grid(row = i, column = 7)
-            j = Label(insertwindow2, text = "Αριθμός υλικών")
+            j = Label(self.insertwindow2, text = "Αριθμός υλικών")
             self.ol.append(j)
             self.ol[i].grid(row = i, column = 8)
-            k = Entry(insertwindow2)
+            k = Entry(self.insertwindow2)
             self.oe.append(k)
             self.oe[i].grid(row = i, column = 9)         
 
         
-        self.obutton = Button(insertwindow2, text = "Ok", fg = "Green", command = lambda : self.Submit_())
+        self.obutton = Button(self.insertwindow2, text = "Ok", fg = "Green", command = lambda : self.Submit_())
         self.obutton.grid(row = self.nos, column = 0)
-        self.qbutton = Button(insertwindow2, text = "Quit", fg = "Red", command = insertwindow2.destroy)
+        self.qbutton = Button(self.insertwindow2, text = "Quit", fg = "Red", command = self.insertwindow2.destroy)
         self.qbutton.grid(row = self.nos, column = 5)
 
     def Submit_(self):
-        yoves = []
         tn = self.name + "_STEPS"
         try:
             my_conn = sqlite3.connect("dishes.db")
-            sql = "CREATE TABLE " + tn+ " (SN INTEGER PRIMARY KEY , TITLE VARCHAR(128), DESCRIPTION VARCHAR(128),INGREDIENTS VARCHAR(128),TIMEH INTEGER,TIMEM INTEGER)"
+            sql = "CREATE TABLE " + tn+ " (SN INTEGER PRIMARY KEY , TITLE VARCHAR(128), DESCRIPTION VARCHAR(128),INGREDIENTS VARCHAR(128),INGQ VARCHAR(128),INGU VARCHAR (128),TIMEH INTEGER,TIMEM INTEGER)"
             print(sql)
             c = my_conn.cursor()
             c.execute(sql)
@@ -92,10 +91,9 @@ class Recipe():
             except Error as e:
                 print(e)
                 
-            a = Steps.Step(self.me[i].get(), self.qe[i].get(), int(self.oe[i].get()), self.de[i].get(), self.me[i].get(), i + 1)
-            yoves.append(a)
-        print(yoves)
-        
+        a = Steps.Step(self.me[i].get(), self.qe[i].get(), int(self.oe[i].get()), self.de[i].get(), self.me[i].get(), self.nos, tn)
+        self.insertwindow2.destroy()
+             
 
   
 
