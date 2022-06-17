@@ -14,13 +14,12 @@ class Step():
         self.timeh = timeh
         self.timem = timem
         self.tn = tablename
-        self.counter = 1
         self.createingredientlist()
         
 
     def createingredientlist(self):
         self.insertwindow = Toplevel()
-        self.insertwindow.title("Υλικά βήματος " + str(self.counter))
+        self.insertwindow.title("Υλικά βήματος " + str(self.stepno))
         self.nl = []
         self.ne = []
         self.ql = []
@@ -55,14 +54,11 @@ class Step():
 
 
     def Submit(self):
-        if self.counter < self.stepno:
-            self.counter = self.counter + 1
+
             for i in range(self.noi):
                 Ingredients(self.ne[i].get(), self.qe[i].get(), self.ue[i].get(), self.stepno, self.tn)
             self.insertwindow.destroy()
-            self.createingredientlist()
-        else:
-            self.insertwindow.destroy()
+
 
         
 

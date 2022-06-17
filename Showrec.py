@@ -278,4 +278,4 @@ class Show_rec():
             self.endbutton.grid(row = 2, sticky = W)
            
 
-Show_rec(63)
+

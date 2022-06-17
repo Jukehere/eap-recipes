@@ -79,6 +79,7 @@ class Recipe():
             print(e)
 
         for i in range(self.nos):
+            a = Steps.Step(self.me[i].get(), self.qe[i].get(), int(self.oe[i].get()), self.de[i].get(), self.me[i].get(), i + 1, tn)
             my_conn = None
             j = i + 1
             try:
@@ -91,7 +92,7 @@ class Recipe():
             except Error as e:
                 print(e)
                 
-        a = Steps.Step(self.me[i].get(), self.qe[i].get(), int(self.oe[i].get()), self.de[i].get(), self.me[i].get(), self.nos, tn)
+        
         self.insertwindow2.destroy()
              
 
