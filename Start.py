@@ -1,9 +1,9 @@
 import tkinter
 
 def signinbutton():
-    from Authentication import sgnpvrfctn
+    from Authentication import loginroccess
     root.destroy()
-    sgnpvrfctn()
+    loginroccess()
 
 def signupbutton():
     from Signup import signupproccess
