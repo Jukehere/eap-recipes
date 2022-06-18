@@ -134,6 +134,7 @@ def adminrecipes(root):
                     messagebox.showinfo(title="Success", message="Επιτυχής αλλαγή.", parent = catchange)
                     catchange.destroy()
                     adminmenu()
+                changemenu.destroy()
                 catchange = tkinter.Tk()
                 catchange.title('Σύστημα καταγραφής συνταγών μαγειρικής')
                 catlabel = tkinter.Label(catchange, text=('Επιλογές κατηγοριών'), font=1)
