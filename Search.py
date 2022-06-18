@@ -9,7 +9,7 @@ def searchcat(root):
         def submitsel():
             show.destroy()
             from CatRSel import maincatrsel
-            maincatrsel()
+            maincatrsel(selection)
         def close():
             show.destroy()
             searchmenu()
