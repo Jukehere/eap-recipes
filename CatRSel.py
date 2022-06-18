@@ -21,7 +21,7 @@ def maincatrsel(category):
         insertwindow.destroy()
         from Search import searchmenu
         searchmenu()
-    insertwindow = Toplevel()
+    insertwindow = Tk()
     a = Label(insertwindow, text = "RID")
     a.grid(row = 1, sticky = W)
     b = Entry(insertwindow)
