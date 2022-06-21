@@ -15,7 +15,7 @@ class Show_rec():
     
             
     def Show_rec_RID(self):
-        self.insertwindow = Toplevel()
+        self.insertwindow = Tk()
         try:
             my_conn = sqlite3.connect("dishes.db")
             sql = "SELECT Name FROM Recipes WHERE RID="+str(self.RID)+";"
@@ -114,10 +114,9 @@ class Show_rec():
         self.qbutton.grid(row = 4, column = 2)
 
     def run(self):
-        self.insertwindow.destroy()
         self.yoves = "insertwindow" + str(self.index)
         self.yove = "Βήμα Νο" + str(self.index)
-        self.yoves = Toplevel()
+        self.yoves = Tk()
         self.yoves.title(str(self.yove))
         try:
             my_conn = sqlite3.connect("dishes.db")
@@ -270,7 +269,7 @@ class Show_rec():
             self.run()
         else:
             self.yoves = "completewindow"
-            self.yoves = Toplevel()
+            self.yoves = Tk()
             self.yoves.title("Τέλος Συνταγής")
             a = Label(self.yoves, text = " Η Συνταγή Ολοκληρώθηκε ! ")
             a.grid(row = 1, sticky = W)

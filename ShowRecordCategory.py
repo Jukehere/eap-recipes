@@ -1,7 +1,7 @@
 import sqlite3
 from tkinter import *
 from sqlite3 import Error
-from ShowRec import *
+from Showrec import *
 
 class SHOW_REC_CAT():
     def __init__(self,Cat):
