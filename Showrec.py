@@ -240,8 +240,7 @@ class Show_rec():
             print(e)
 
         
-
-                
+    
         self.timeS = self.timeSH * 60 + self.timeSM
         progress = round((self.timeE / self.timeT) * 100, 1)
         self.timeE = self.timeE + self.timeS
@@ -275,6 +274,7 @@ class Show_rec():
             a.grid(row = 1, sticky = W)
             self.endbutton = Button(self.yoves, text = "Τέλος", fg = "Black", command = lambda : self.yoves.destroy())
             self.endbutton.grid(row = 2, sticky = W)
+            self.insertwindow.destroy()
            
 
 
