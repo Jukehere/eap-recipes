@@ -22,9 +22,9 @@ def signup(root,username,password):
             connection.commit()
             messagebox.showinfo("Success", "Η εγγραφή σας ήταν επιτυχής. Μπορείτε να εισέλθετε.", parent = root)
             connection.close()   
-            from Authentication import sgnpvrfctn
+            from Authentication import loginroccess
             root.destroy()
-            sgnpvrfctn()
+            loginroccess()
 
 def signupproccess():
     root = tkinter.Tk()
